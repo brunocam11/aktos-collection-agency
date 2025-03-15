@@ -96,11 +96,56 @@ The coverage report shows which lines of code are executed during tests, helping
 
 ## Deployment
 
-The application is designed to be deployed to Heroku or any other cloud platform that supports Django applications. For production deployment:
+The application is designed to be deployed to Heroku or any other cloud platform that supports Django applications.
 
-1. Set the `DATABASE_URL` environment variable for PostgreSQL
-2. Configure static file serving
-3. Set `DEBUG=False` and configure proper `ALLOWED_HOSTS`
+### Deploying to Heroku
+
+1. Create a Heroku account and install the Heroku CLI
+2. Login to Heroku:
+   ```
+   heroku login
+   ```
+
+3. Create a new Heroku app:
+   ```
+   heroku create your-app-name
+   ```
+
+4. Add PostgreSQL add-on:
+   ```
+   heroku addons:create heroku-postgresql:mini
+   ```
+
+5. Configure environment variables:
+   ```
+   heroku config:set DEBUG=False
+   heroku config:set ALLOWED_HOSTS=your-app-name.herokuapp.com
+   heroku config:set SECRET_KEY=your-secret-key
+   ```
+
+6. Deploy your code:
+   ```
+   git push heroku main
+   ```
+
+7. Run migrations on Heroku:
+   ```
+   heroku run python manage.py migrate
+   ```
+
+8. Create a superuser:
+   ```
+   heroku run python manage.py createsuperuser
+   ```
+
+The API will be available at `https://your-app-name.herokuapp.com/api/`
+
+### Other Production Considerations
+
+- Configure static file serving with whitenoise or AWS S3
+- Set up proper logging
+- Consider using environment variables for all sensitive configurations
+- Monitor application performance using Heroku metrics or other APM tools
 
 ## Design Decisions
 
