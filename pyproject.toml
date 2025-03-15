@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "aktos-collection"
+version = "0.1.0"
+description = "Collection Agency Data Management System"
+authors = ["Bruno Camargo"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+django = "^5.1.7"
+djangorestframework = "^3.15.2"
+django-filter = "^25.1"
+psycopg2-binary = "^2.9.10"
+dj-database-url = "^2.3.0"
+coreapi = "^2.3.3"
+
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.6.12"
+black = "^25.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+)/
+'''
