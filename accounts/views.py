@@ -55,6 +55,10 @@ class AccountFilter(FilterSet):
 class AccountViewSet(viewsets.ModelViewSet):
     """
     API endpoint for accounts with filtering capabilities.
+    
+    TODO: Add authentication and permissions for production use
+    TODO: Consider adding rate limiting for API endpoints
+    NOTE: The select_related and prefetch_related are used to optimize database queries
     """
 
     queryset = (
@@ -96,14 +100,17 @@ class AccountViewSet(viewsets.ModelViewSet):
     def upload_csv(self, request):
         """
         Upload a CSV file to import account data.
-
+        
         Request Parameters:
             file: The CSV file to upload
             collection_agency_id: ID of the collection agency
             client_id: ID of the client
-
+            
         Returns:
             Dictionary with import statistics or error message
+            
+        TODO: For large files, consider implementing asynchronous processing with Celery
+        NOTE: Current implementation processes files synchronously which may timeout for very large datasets
         """
         # Validate required parameters
         if "file" not in request.FILES:

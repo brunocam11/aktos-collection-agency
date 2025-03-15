@@ -6,6 +6,11 @@ from typing import List, Optional, Dict, Any
 class CollectionAgency(models.Model):
     """
     Represents a collection agency that collects debts on behalf of clients.
+    
+    A collection agency manages debt collection on behalf of clients.
+    
+    TODO: Add fields for agency contact information and address
+    TODO: Consider adding reporting capabilities for agency performance
     """
 
     name = models.CharField(max_length=255)
@@ -32,6 +37,11 @@ class CollectionAgency(models.Model):
 class Client(models.Model):
     """
     Represents an organization that hires a collection agency to collect debt on their behalf.
+    
+    Clients are organizations that hire collection agencies to collect debt on their behalf.
+    
+    TODO: Add fields for client contact information and specific requirements
+    NOTE: Each client is associated with exactly one collection agency in this model
     """
 
     name = models.CharField(max_length=255)
@@ -60,6 +70,12 @@ class Client(models.Model):
 class Consumer(models.Model):
     """
     Represents a person/entity that owes a debt.
+    
+    Consumers can have multiple accounts (debts) across different clients.
+    
+    TODO: Implement proper encryption for PII (Personally Identifiable Information)
+    TODO: Add more fields for contact details (email, phone)
+    NOTE: SSN is stored as plain text currently but should be encrypted in production
     """
 
     name = models.CharField(max_length=255)
@@ -87,6 +103,12 @@ class Consumer(models.Model):
 class Account(models.Model):
     """
     Represents a debt account that needs to be collected.
+    
+    An account is associated with a client and can have multiple consumers.
+    
+    TODO: Add fields for payment history and collection attempts
+    TODO: Implement status transitions with proper validations
+    NOTE: The many-to-many relationship with consumers is implemented via AccountConsumer
     """
 
     # Status choices

@@ -18,7 +18,14 @@ class CSVImportError(Exception):
 
 class CSVImportService:
     """
-    Service for importing CSV data into the database.
+    Service for importing data from CSV files.
+    
+    This service handles the ingestion of CSV data into the system, creating accounts
+    and consumers as needed.
+    
+    TODO: Add validation for SSN format and other sensitive fields
+    TODO: Consider implementing logging of import activities for audit purposes
+    NOTE: All operations are wrapped in a transaction to ensure data consistency
     """
 
     def __init__(self, collection_agency_id: int, client_id: int):
