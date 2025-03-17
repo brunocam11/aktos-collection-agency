@@ -51,9 +51,6 @@ Icon
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 
-# Poetry
-poetry.lock
-
 # VSCode
 .vscode/
 *.code-workspace
